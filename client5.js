@@ -28,11 +28,11 @@ $(document).ready(function(){
 		// convertString(author, quote, rating);	
 	};
 
-	addtoObject("bob", "really good quote",2);
+	// addtoObject("bob", "really good quote",2);
 
-	var manualAdd = addtoObject("Quote1", "test", 3);
-	savedEntries.push(manualAdd);
-	console.log(savedEntries);
+	// var manualAdd = addtoObject("Quote1", "test", 3);
+	// savedEntries.push(manualAdd);
+	// console.log(savedEntries);
 
 
 
@@ -50,45 +50,43 @@ $(document).ready(function(){
 		savedEntries.push(returnEntry);
 		console.log(savedEntries);
 
-		// var newAuthorString = author.toString();
-		// console.log (newAuthorString);
-		$(".quoteContainer").prepend ($('<div class="quoteDisplay"> Author: ' + author + 'Quote: ' + quote + 'Rating: ' + rating + '</div>'));
 
-		});
-
-	// 	var convertString = function(){
-	// 		$(".quoteDisplay").prepend($'<div class="entryDiv"></div>');
-	// 		$(".entryDiv").prepend($'<div class="authorDiv"></div>');
-	// 		$(".authorDiv").prepend("Author: " + author );
-	// 		$(".entryDiv").prepend($'<div class="quoteDiv"></div>');
-	// 		$(".quoteDiv").prepend("Quote: " + quote);
-	// 		$(".entryDiv").prepend($'<div class="ratingDiv"></div>');
-	// 		$(".ratingDiv").prepend("Rating: " + rating);
-
-	// 	convertString(author, quote, rating);
-	// 	}
-	 //});
+			$(".quoteContainer").prepend ($('<div class="quoteDisplay"> <div class="quoteText"> <div class="quoteAuthor"> Author:  '+ author + '</div> <div class="quoteQuote"> Quote:  ' + quote + '</div> <div class="quoteRating"> Rating:  ' + rating + '</div> <div> </div>'));
 
 
+		 		var dropDown = document.getElementById("authorList");{	
 
-		// var convertString = function(author, quote, rating){ 
-	// 		var stringEntry = addtoObject(author, quote, rating);
-	// 		var authorString = stringEntry.author.toString();
-	// 		var quoteString = stringEntry.quote.toString();
-	// 		var ratingString = stringEntry.rating.toString();
-	// 		return authorString, quoteString, ratingString;
-	// }
+			 			var newAuthor= author;
+			 			var newDropDown = document.createElement("option");
+			 				newDropDown.textContent = newAuthor;
+			 				newDropDown.value = newAuthor;
+			 				dropDown.appendChild(newDropDown);
+			 			
+			 		}
 
-	// $('#displayQuote').on('click', function() 	{
-	// // Use jQuery to create a new DOM element.
-	// 	var x = savedEntries.toString();
-	// 	console.log(savedEntries.toString());
-	// 	console.log(savedEntries instanceof Array);
-	// 	var quoteList = $("<p> {0} </p>".supplant([x]));
-	// 	console.log(quoteList);
+	});
 
-	// // Add the DOM element to the page.
-	// 	$(".quoteDisplay").append(quoteList);
-	// });
+	$("select").change(function(){
+		var selectFilter = document.getElementById("authorList");
+		var strSelectedAuthor = selectFilter.options[selectFilter.selectedIndex].text;
+		console.log(strSelectedAuthor);
 
+		var selectedAuthorArray = [];
+		var selectedAuthorArray = savedEntries.filter (function(j) {
+				return strSelectedAuthor === j.author
+
+			});
+				console.log(selectedAuthorArray);
+				if (selectedAuthorArray.length !==0) {
+					$(".quoteText").css("display", "none");
+					//var filteredQuotes = $('<div class="newFilterList"> {0} </div>'.supplant([selectedAuthorArray]));
+					//$(".quoteDisplay").append(filteredQuotes);
+					for (i=0; i<selectedAuthorArray.length; i++) {
+					$(".quoteContainer").prepend ($('<div class="quoteDisplay"> <div class="filteredQuotes"> <div class="quoteAuthor"> Author: ' + selectedAuthorArray[i]['author'] + '</div> <div class="quoteQuote"> Quote:  ' + selectedAuthorArray[i]['quote'] + '</div> <div class="quoteRating"> Rating:  ' + selectedAuthorArray[i]['rating'] + '</div> <div> </div>'));
+					};
+				}
+		
+	});
+
+			
 });

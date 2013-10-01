@@ -26,13 +26,24 @@ background-color: papayawhip;
 }
 
 .quoteDisplay{
-	border: 1px solid black;
-	margin: 5px;
+	
+	margin:5px;
 	font-family:Helvetica;
-	background-color: seashell;
-	width: auto;
+	width:100%;
+	display:block;
+}
+
+.quoteText{
+	border: 1px solid black;
+	width:auto;
 	display:inline-block;
+	background-color: seashell;
+	padding: 5px;
+}
+
+.quoteAuthor, .quoteQuote, .quoteRating {
 	padding:5px;
+	display:inline-block;
 }
 
 /*.container{
